@@ -26,8 +26,7 @@ public class LoginController {
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
         // Vérifier si l'utilisateur est présent dans la table Administrateur
         if (this.isUserInAdministrateurTable(username, password)) {
-            model.addAttribute("username", username);
-            return "home";
+            return "redirect:/home";
         } else {
             model.addAttribute("error", "Username does not exist or password is incorrect. Please try again.");
             return "login";

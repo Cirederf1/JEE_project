@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import ensg.tsi.j2e.colloques.metier.*;
 
+import java.util.List;
+
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -42,7 +44,9 @@ public class DataInitializer implements CommandLineRunner {
         Administrateur admin = new Administrateur("admin", "admin");
         administrateurRepository.save(admin);
         
+        List<Evenement> events = (List<Evenement>) evenementRepository.findAll();
 
+        System.out.println(events.get(0).getIntitule());
 
 
     }

@@ -26,5 +26,9 @@ public class EvenementService {
     public void delete(Evenement evenement) {
         repository.delete(evenement);
     }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 }
 

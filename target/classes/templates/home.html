@@ -2,8 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Bienvenue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bonjour, <span th:text="${username}"></span></h1>
+<h2>Événements :</h2>
+
+
+<a th:href="@{/createEvent}">Ajouter un événement</a>
+<button id="removeEvent"> Supprimer un événement </button>
+<button id="modifyEvent"> Modifier un événement </button>
+
+<table>
+    <thead>
+    <tr>
+        <th>Intitulé</th>
+        <th>Thème</th>
+        <th>Durée</th>
+        <th>Nombre de participants maximum</th>
+        <th>Description</th>
+        <th>Organisateur</th>
+        <th>Type d'événement</th>
+        <th> </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="evenement : ${evenements}">
+        <td th:text="${evenement.intitule}"></td>
+        <td th:text="${evenement.theme}"></td>
+        <td th:text="${evenement.duree}"></td>
+        <td th:text="${evenement.nb_part_max}"></td>
+        <td th:text="${evenement.description}"></td>
+        <td th:text="${evenement.organisateur}"></td>
+        <td th:text="${evenement.type_even}"></td>
+        <td>
+            <a th:href="@{/deleteEvent}">Supprimer un événement</a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

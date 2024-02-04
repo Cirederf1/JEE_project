@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire d'Événement</title>
+</head>
+<body>
+<h1>Formulaire d'Événement</h1>
+<form th:action="@{/createEvent}"  method="post">
+    <label for="intitule">Intitulé:</label>
+    <input type="text" id="intitule" name="intitule" required><br>
+
+    <label for="theme">Thème:</label>
+    <input type="text" id="theme" name="theme" required><br>
+
+    <label for="date_debut">Date de début:</label>
+    <input type="text" id="date_debut" name="date_debut" required><br>
+
+    <label for="duree">Durée:</label>
+    <input type="text" id="duree" name="duree" required><br>
+
+    <label for="nb_part_max">Nombre de participants maximum:</label>
+    <input type="text" id="nb_part_max" name="nb_part_max" required><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required><br>
+
+    <label for="organisateur">Organisateur:</label>
+    <input type="text" id="organisateur" name="organisateur" required><br>
+
+    <label for="type_even">Type d'événement:</label>
+    <input type="text" id="type_even" name="type_even" required><br>
+
+    <button type="submit">Ajouter Événement</button>
+</form>
+</body>
+</html>
