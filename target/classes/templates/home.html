@@ -38,8 +38,14 @@
 
 
 <a th:href="@{/createEvent}">Ajouter un événement</a>
-<button id="removeEvent"> Supprimer un événement </button>
 <button id="modifyEvent"> Modifier un événement </button>
+
+<form th:if="${evenements.size() != 0}" th:action="@{/deleteEvent}" method="post">
+    <select name="eventId" >
+        <option th:each="event : ${evenements}" th:value="${event.num_even}" th:text="${event.intitule}"></option>
+    </select>
+    <button type="submit">Delete Event</button>
+</form>
 
 <table>
     <thead>
@@ -51,8 +57,6 @@
         <th>Description</th>
         <th>Organisateur</th>
         <th>Type d'événement</th>
-        <th> </th>
-
     </tr>
     </thead>
     <tbody>
@@ -64,10 +68,6 @@
         <td th:text="${evenement.description}"></td>
         <td th:text="${evenement.organisateur}"></td>
         <td th:text="${evenement.type_even}"></td>
-        <td>
-            <a th:href="@{/deleteEvent}">Supprimer un événement</a>
-        </td>
-
     </tr>
     </tbody>
 </table>

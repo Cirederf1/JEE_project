@@ -47,10 +47,10 @@ public class EvenementController {
         return "redirect:/home";
     }
 
-    @GetMapping("/deleteEvent")
-    public String deleteEvent(){
-
-        return "home";
+    @PostMapping("/deleteEvent")
+    public String deleteEvent(@RequestParam("eventId") Long eventId) {
+        evenementService.delete(eventId);
+        return "redirect:/home";
     }
 
 }
