@@ -1,4 +1,4 @@
-package ensg.tsi.j2e.colloques.reporitories;
+package ensg.tsi.j2e.colloques.repositories;
 
 import ensg.tsi.j2e.colloques.metier.Participant;
 import org.springframework.data.repository.CrudRepository;

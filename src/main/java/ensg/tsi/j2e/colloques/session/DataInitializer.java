@@ -1,7 +1,6 @@
 package ensg.tsi.j2e.colloques.session;
 
-import ensg.tsi.j2e.colloques.reporitories.EvenementRepo;
-import ensg.tsi.j2e.colloques.reporitories.ParticipantRepo;
+import ensg.tsi.j2e.colloques.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,11 +11,13 @@ public class DataInitializer implements CommandLineRunner {
 
     private final EvenementRepo evenementRepository;
     private final ParticipantRepo participantRepository;
+    private final AdministrateurRepo administrateurRepository;
 
     @Autowired
-    public DataInitializer(EvenementRepo evenementRepository, ParticipantRepo participantRepository) {
+    public DataInitializer(EvenementRepo evenementRepository, ParticipantRepo participantRepository, AdministrateurRepo administrateurRepository) {
         this.evenementRepository = evenementRepository;
         this.participantRepository = participantRepository;
+        this.administrateurRepository = administrateurRepository;
     }
 
     @Override
@@ -37,6 +38,11 @@ public class DataInitializer implements CommandLineRunner {
         evenementRepository.save(evenement2);
 
         evenementRepository.delete(evenement2);
+
+        Administrateur admin = new Administrateur("admin", "admin");
+        administrateurRepository.save(admin);
+        
+
 
 
     }

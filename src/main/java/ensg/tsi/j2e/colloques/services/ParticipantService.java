@@ -1,7 +1,7 @@
 package ensg.tsi.j2e.colloques.services;
 
 import ensg.tsi.j2e.colloques.metier.Participant;
-import ensg.tsi.j2e.colloques.reporitories.ParticipantRepo;
+import ensg.tsi.j2e.colloques.repositories.ParticipantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
