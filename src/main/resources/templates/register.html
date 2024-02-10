@@ -31,5 +31,9 @@
       <input type="hidden" name="eventId" th:value="${eventId}" />
       <input type="submit" value="Register" />
     </form>
+
+    <div th:if="${error}" class="error-message">
+      <p th:text="${error}"></p>
+    </div>
   </body>
 </html>

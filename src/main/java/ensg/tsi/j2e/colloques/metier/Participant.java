@@ -93,5 +93,18 @@ public class Participant {
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
     }
+
+    
+
+    public void updateParticipant(Participant p) {
+        this.nom = p.getNom();
+        this.prenom = p.getPrenom();
+        this.email = p.getEmail();
+        this.date_naiss = p.getDate_naiss();
+        this.organisation = p.getOrganisation();
+        this.observations = p.getObservations();
+    }
+
 }
+
 

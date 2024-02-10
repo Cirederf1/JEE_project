@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Modifier un participant</title>
+  </head>
+  <body>
+    <h1>Modifier un participant</h1>
+    <form
+      th:action="@{/modifyParticipant}"
+      th:object="${participant}"
+      method="post"
+    >
+      <label for="nom">Nom:</label>
+      <input
+        type="text"
+        id="nom"
+        name="nom"
+        th:value="${participant.nom}"
+        required
+      />
+
+      <label for="prenom">Prénom:</label>
+      <input
+        type="text"
+        id="prenom"
+        name="prenom"
+        th:value="${participant.prenom}"
+        required
+      />
+
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        th:value="${participant.email}"
+        required
+      />
+
+      <label for="date_naiss">Date de naissance:</label>
+      <input
+        type="text"
+        id="date_naiss"
+        name="date_naiss"
+        th:value="${participant.date_naiss}"
+        required
+      />
+
+      <label for="organisation">Organisation:</label>
+      <input
+        type="text"
+        id="organisation"
+        name="organisation"
+        th:value="${participant.organisation}"
+        required
+      />
+
+      <label for="observations">Observations:</label>
+      <input
+        type="text"
+        id="observations"
+        name="observations"
+        th:value="${participant.observations}"
+        required
+      />
+
+      <input type="hidden" name="eventId" th:value="${event.num_even}" />
+      <input
+        type="hidden"
+        name="participantId"
+        th:value="${participant.num_pers}"
+      />
+      <button type="submit">Modifier Participant</button>
+    </form>
+  </body>
+</html>

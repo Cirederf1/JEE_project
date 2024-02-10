@@ -1,18 +1,54 @@
-<!-- FILEPATH: /home/fredo/Documents/J2E/github/JEE_project/src/main/resources/templates/eventParticipants.html -->
-
+<style>
+  .button-container {
+    display: flex;
+  }
+</style>
 <table>
   <thead>
     <tr>
       <th>Nom</th>
       <th>Prénom</th>
       <th>Email</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr th:each="participant : ${participants}">
+    <tr th:each="participant : ${event.participants}">
       <td th:text="${participant.nom}"></td>
       <td th:text="${participant.prenom}"></td>
       <td th:text="${participant.email}"></td>
+      <td class="button-container">
+        <form th:action="@{/deleteEventParticipant}" method="post">
+          <input
+            type="hidden"
+            name="participantId"
+            th:value="${participant.num_pers}"
+          />
+          <input type="hidden" name="eventId" th:value="${event.num_even}" />
+          <button type="submit">Delete</button>
+        </form>
+        <form th:action="@{/goToModifyParticipant}" method="post">
+          <input type="hidden" name="eventId" th:value="${event.num_even}" />
+          <input
+            type="hidden"
+            name="participantId"
+            th:value="${participant.num_pers}"
+          />
+          <input type="hidden" name="eventId" th:value="${event.num_even}" />
+          <button type="submit">Modify</button>
+        </form>
+      </td>
     </tr>
   </tbody>
+
+  <tfoot>
+    <tr>
+      <td class="button-container">
+        <form th:action="@{/goToRegisterAdmin}" method="post">
+          <input type="hidden" name="eventId" th:value="${event.num_even}" />
+          <button type="submit">Register</button>
+        </form>
+      </td>
+    </tr>
+  </tfoot>
 </table>
