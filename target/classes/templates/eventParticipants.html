@@ -1,0 +1,18 @@
+<!-- FILEPATH: /home/fredo/Documents/J2E/github/JEE_project/src/main/resources/templates/eventParticipants.html -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="participant : ${participants}">
+      <td th:text="${participant.nom}"></td>
+      <td th:text="${participant.prenom}"></td>
+      <td th:text="${participant.email}"></td>
+    </tr>
+  </tbody>
+</table>

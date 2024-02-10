@@ -84,6 +84,14 @@
               />
               <button type="submit">Modify</button>
             </form>
+            <form th:action="@{/goToEventParticipants}" method="post">
+              <input
+                type="hidden"
+                name="eventId"
+                th:value="${evenement.num_even}"
+              />
+              <button type="submit">Participants</button>
+            </form>
           </td>
         </tr>
       </tbody>
