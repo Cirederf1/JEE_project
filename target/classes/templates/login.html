@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Page de connexion</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Connexion</h1>
     <form th:action="@{/login}" method="post">
-        <input type="text" name="username" placeholder="Username"/>
-        <input type="password" name="password" placeholder="Password"/>
-        <button type="submit">Login</button>
+      <input type="text" name="username" placeholder="Username" />
+      <input type="password" name="password" placeholder="Password" />
+      <button type="submit">Login</button>
     </form>
+
     <div th:if="${error}" class="error-message">
-        <p th:text="${error}"></p>
+      <p th:text="${error}"></p>
     </div>
-</body>
+
+    <h1>Register to an event</h1>
+    <form th:action="@{/goToEvents}" method="post">
+      <button type="submit">View Events</button>
+    </form>
+  </body>
 </html>
-        
-    </body>
-    </html>

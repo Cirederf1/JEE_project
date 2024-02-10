@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Events</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Events</h1>
+    <table>
+      <tr>
+        <th>Nom</th>
+        <th>Date</th>
+        <th>Description</th>
+      </tr>
+      <tr th:each="event : ${events}">
+        <td th:text="${event.intitule}"></td>
+        <td th:text="${event.date_debut}"></td>
+        <td th:text="${event.description}"></td>
+        <td>
+          <form th:action="@{/goToRegister}" method="post">
+            <button type="submit">Register</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -9,6 +9,7 @@ import ensg.tsi.j2e.colloques.services.EvenementService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,9 +23,7 @@ public class EvenementController {
         this.evenementService = evenementService;
     }
 
-
-
-    @PostMapping("/addEvent")
+    @PostMapping("/goToAddEvent")
     public String addEvent() {
         return "createEvent";
     }
@@ -53,12 +52,27 @@ public class EvenementController {
         return "home";
     }
 
-    @PostMapping("/modifyEvent")
+    @PostMapping("/goToModifyEvent")
     public String modifyEvent(@RequestParam("eventId") Long eventId, Model model) {
-        Optional<Evenement> event = evenementService.findById(eventId);
-        model.addAttribute("event", event);
-        model.addAttribute("evenements", evenementService.findAll());
+        model.addAttribute("event", evenementService.findById(eventId).get());
         return "modifyEvent";
+    }
+
+    @PostMapping("/modifyEvent")
+    public String submitModifiedEvent(@RequestParam("eventId") Long eventId, @ModelAttribute Evenement updatedEvent, Model model) {
+        Evenement e = evenementService.findById(eventId).get();
+        e.setEvenementDetails(updatedEvent);
+
+        evenementService.save(e);
+        model.addAttribute("evenements", evenementService.findAll());
+        return "home";
+    }
+
+    @PostMapping("/goToEvents")
+    public String listEvents(Model model) {
+        List<Evenement> events = evenementService.findAll();
+        model.addAttribute("events", events);
+        return "events";
     }
 
 }

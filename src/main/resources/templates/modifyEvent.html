@@ -1,8 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-  </head>
-  <body></body>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire d'Événement</title>
+</head>
+<body>
+<h1>Formulaire d'Événement</h1>
+<form th:action="@{/modifyEvent}" th:object="${event}" method="post">
+    <label for="intitule">Intitulé:</label>
+    <input type="text" id="intitule" name="intitule" th:value="${event.intitule}" required><br>
+
+    <label for="theme">Thème:</label>
+    <input type="text" id="theme" name="theme" th:value="${event.theme}" required><br>
+
+    <label for="date_debut">Date de début:</label>
+    <input type="text" id="date_debut" name="date_debut" th:value="${event.date_debut}" required><br>
+
+    <label for="duree">Durée:</label>
+    <input type="text" id="duree" name="duree" th:value="${event.duree}" required><br>
+
+    <label for="nb_part_max">Nombre de participants maximum:</label>
+    <input type="text" id="nb_part_max" name="nb_part_max" th:value="${event.nb_part_max}" required><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" th:value="${event.description}" required><br>
+
+    <label for="organisateur">Organisateur:</label>
+    <input type="text" id="organisateur" name="organisateur" th:value="${event.organisateur}" required><br>
+
+    <label for="type_even">Type d'événement:</label>
+    <input type="text" id="type_even" name="type_even" th:value="${event.type_even}" required><br>
+
+    <input
+        type="hidden"
+        name="eventId"
+        th:value="${event.num_even}"
+    />
+    <button type="submit">Modifier Événement</button>
+</form>
+</body>
 </html>

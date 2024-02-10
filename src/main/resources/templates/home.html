@@ -32,43 +32,17 @@
       tr:nth-child(even) {
         background-color: #f9f9f9;
       }
+
+      .button-container {
+        display: flex;
+      }
     </style>
   </head>
   <body>
     <h2>Événements :</h2>
 
-    <form th:action="@{/addEvent}" method="post">
+    <form th:action="@{/goToAddEvent}" method="post">
       <button type="submit">Add Event</button>
-    </form>
-
-    <form
-      th:if="${evenements.size() != 0}"
-      th:action="@{/deleteEvent}"
-      method="post"
-    >
-      <select name="eventId">
-        <option
-          th:each="event : ${evenements}"
-          th:value="${event.num_even}"
-          th:text="${event.intitule}"
-        ></option>
-      </select>
-      <button type="submit">Delete Event</button>
-    </form>
-
-    <form
-      th:if="${evenements.size() != 0}"
-      th:action="@{/modifyEvent}"
-      method="post"
-    >
-      <select name="eventId">
-        <option
-          th:each="event : ${evenements}"
-          th:value="${event.num_even}"
-          th:text="${event.intitule}"
-        ></option>
-      </select>
-      <button type="submit">Modify Event</button>
     </form>
 
     <table>
@@ -81,6 +55,7 @@
           <th>Description</th>
           <th>Organisateur</th>
           <th>Type d'événement</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -92,6 +67,24 @@
           <td th:text="${evenement.description}"></td>
           <td th:text="${evenement.organisateur}"></td>
           <td th:text="${evenement.type_even}"></td>
+          <td class="button-container">
+            <form th:action="@{/deleteEvent}" method="post">
+              <input
+                type="hidden"
+                name="eventId"
+                th:value="${evenement.num_even}"
+              />
+              <button type="submit">Delete</button>
+            </form>
+            <form th:action="@{/goToModifyEvent}" method="post">
+              <input
+                type="hidden"
+                name="eventId"
+                th:value="${evenement.num_even}"
+              />
+              <button type="submit">Modify</button>
+            </form>
+          </td>
         </tr>
       </tbody>
     </table>

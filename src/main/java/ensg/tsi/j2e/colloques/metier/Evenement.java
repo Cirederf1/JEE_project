@@ -119,6 +119,17 @@ public class Evenement {
         participant.setEvenement(this);
     }
 
+    public void setEvenementDetails(Evenement evenement) {
+        this.intitule = evenement.getIntitule();
+        this.theme = evenement.getTheme();
+        this.date_debut = evenement.getDate_debut();
+        this.duree = evenement.getDuree();
+        this.nb_part_max = evenement.getNb_part_max();
+        this.description = evenement.getDescription();
+        this.organisateur = evenement.getOrganisateur();
+        this.type_even = evenement.getType_even();
+    }
+
     public List<Participant> getParticipants() {
         return participants;
     }
