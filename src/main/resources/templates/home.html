@@ -1,100 +1,92 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Bienvenue</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
 
-      h1 {
-        color: #333;
-      }
+<head>
+  <title>Bienvenue</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-      }
+    h1 {
+      color: #333;
+    }
 
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
 
-      th {
-        background-color: #f2f2f2;
-      }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
 
-      tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
+    th {
+      background-color: #f2f2f2;
+    }
 
-      .button-container {
-        display: flex;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Événements :</h2>
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
 
-    <form th:action="@{/goToAddEvent}" method="post">
-      <button type="submit">Add Event</button>
-    </form>
+    .button-container {
+      display: flex;
+    }
+  </style>
+</head>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Intitulé</th>
-          <th>Thème</th>
-          <th>Durée</th>
-          <th>Nombre de participants maximum</th>
-          <th>Description</th>
-          <th>Organisateur</th>
-          <th>Type d'événement</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="evenement : ${evenements}">
-          <td th:text="${evenement.intitule}"></td>
-          <td th:text="${evenement.theme}"></td>
-          <td th:text="${evenement.duree}"></td>
-          <td th:text="${evenement.nb_part_max}"></td>
-          <td th:text="${evenement.description}"></td>
-          <td th:text="${evenement.organisateur}"></td>
-          <td th:text="${evenement.type_even}"></td>
-          <td class="button-container">
-            <form th:action="@{/deleteEvent}" method="post">
-              <input
-                type="hidden"
-                name="eventId"
-                th:value="${evenement.num_even}"
-              />
-              <button type="submit">Delete</button>
-            </form>
-            <form th:action="@{/goToModifyEvent}" method="post">
-              <input
-                type="hidden"
-                name="eventId"
-                th:value="${evenement.num_even}"
-              />
-              <button type="submit">Modify</button>
-            </form>
-            <form th:action="@{/goToEventParticipants}" method="post">
-              <input
-                type="hidden"
-                name="eventId"
-                th:value="${evenement.num_even}"
-              />
-              <button type="submit">Participants</button>
-            </form>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+<body>
+  <h2>Événements :</h2>
+
+  <form th:action="@{/goToAddEvent}" method="post">
+    <button type="submit" class="btn btn-primary">Add Event</button>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Intitulé</th>
+        <th>Thème</th>
+        <th>Durée</th>
+        <th>Nombre de participants maximum</th>
+        <th>Description</th>
+        <th>Organisateur</th>
+        <th>Type d'événement</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="evenement : ${evenements}">
+        <td th:text="${evenement.intitule}"></td>
+        <td th:text="${evenement.theme}"></td>
+        <td th:text="${evenement.duree}"></td>
+        <td th:text="${evenement.nb_part_max}"></td>
+        <td th:text="${evenement.description}"></td>
+        <td th:text="${evenement.organisateur}"></td>
+        <td th:text="${evenement.type_even}"></td>
+        <td class="button-container">
+          <form th:action="@{/deleteEvent}" method="post">
+            <input type="hidden" name="eventId" th:value="${evenement.num_even}" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          <form th:action="@{/goToModifyEvent}" method="post">
+            <input type="hidden" name="eventId" th:value="${evenement.num_even}" />
+            <button type="submit" class="btn btn-primary">Modify</button>
+          </form>
+          <form th:action="@{/goToEventParticipants}" method="post">
+            <input type="hidden" name="eventId" th:value="${evenement.num_even}" />
+            <button type="submit" class="btn btn-info">Participants</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
 </html>

@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Page de connexion</title>
-  </head>
-  <body>
+
+<head>
+  <title>Page de connexion</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .error-message {
+      color: red;
+    }
+
+    .center-elements {
+      text-align: center;
+    }
+
+    .form-control-custom {
+      width: 300px;
+      /* Adjust the width as needed */
+      margin: 0 auto;
+      /* Center the form controls */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container center-elements">
     <h1>Connexion</h1>
     <form th:action="@{/login}" method="post">
-      <input type="text" name="username" placeholder="Username" />
-      <input type="password" name="password" placeholder="Password" />
-      <button type="submit">Login</button>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control form-control-custom" id="username" name="username"
+          placeholder="Username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control form-control-custom" id="password" name="password"
+          placeholder="Password" />
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
     </form>
 
     <div th:if="${error}" class="error-message">
@@ -17,7 +45,13 @@
 
     <h1>Register to an event</h1>
     <form th:action="@{/goToEvents}" method="post">
-      <button type="submit">View Events</button>
+      <button type="submit" class="btn btn-primary">View Events</button>
     </form>
-  </body>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
 </html>
