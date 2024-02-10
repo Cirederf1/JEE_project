@@ -5,6 +5,7 @@ import ensg.tsi.j2e.colloques.services.EvenementService;
 import ensg.tsi.j2e.colloques.repositories.AdministrateurRepo;
 import ensg.tsi.j2e.colloques.repositories.EvenementRepo;
 import ensg.tsi.j2e.colloques.services.EvenementService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class EvenementController {
@@ -20,14 +22,10 @@ public class EvenementController {
         this.evenementService = evenementService;
     }
 
-    @GetMapping("/home")
-    public String showHomePage(Model model) {
-        model.addAttribute("evenements", evenementService.findAll());
-        return "home";
-    }
 
-    @GetMapping("/createEvent")
-    public String createEvent() {
+
+    @PostMapping("/addEvent")
+    public String addEvent() {
         return "createEvent";
     }
 
@@ -44,13 +42,23 @@ public class EvenementController {
 
         Evenement e = new Evenement(intitule, theme, date_debut, duree, nb_part_max, description, organisation, type_even);
         evenementService.save(e);
-        return "redirect:/home";
+        model.addAttribute("evenements", evenementService.findAll());
+        return "home";
     }
 
     @PostMapping("/deleteEvent")
-    public String deleteEvent(@RequestParam("eventId") Long eventId) {
+    public String deleteEvent(@RequestParam("eventId") Long eventId, Model model) {
         evenementService.delete(eventId);
-        return "redirect:/home";
+        model.addAttribute("evenements", evenementService.findAll());
+        return "home";
+    }
+
+    @PostMapping("/modifyEvent")
+    public String modifyEvent(@RequestParam("eventId") Long eventId, Model model) {
+        Optional<Evenement> event = evenementService.findById(eventId);
+        model.addAttribute("event", event);
+        model.addAttribute("evenements", evenementService.findAll());
+        return "modifyEvent";
     }
 
 }
