@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
+  </head>
 
-</body>
+  <body>
+    <form th:action="@{/inscription}" method="post">
+      <input type="text" name="nom" th:placeholder="Nom" required />
+      <input type="text" name="prenom" th:placeholder="Prénom" required />
+      <input type="text" name="email" th:placeholder="Email" required />
+      <input
+        type="text"
+        name="date_naiss"
+        th:placeholder="Datedenaissance"
+        required
+      />
+      <input
+        type="text"
+        name="organisation"
+        th:placeholder="Organisation"
+        required
+      />
+      <input
+        type="text"
+        name="observations"
+        th:placeholder="Observations"
+        required
+      />
+      <input type="hidden" name="eventId" th:value="${eventId}" />
+      <input type="submit" value="Register" />
+    </form>
+  </body>
 </html>

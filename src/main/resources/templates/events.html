@@ -26,6 +26,7 @@
         <td th:text="${event.description}"></td>
         <td>
           <form th:action="@{/goToRegister}" method="post">
+            <input type="hidden" name="eventId" th:value="${event.num_even}" />
             <button type="submit">Register</button>
           </form>
         </td>
