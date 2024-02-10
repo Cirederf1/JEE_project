@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Events</title>
-    <style>
-      table,
-      th,
-      td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-    </style>
-  </head>
 
-  <body>
+<head>
+  <title>Events</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
     <h1>Events</h1>
-    <table>
-      <tr>
-        <th>Nom</th>
-        <th>Date</th>
-        <th>Description</th>
-      </tr>
-      <tr th:each="event : ${events}">
-        <td th:text="${event.intitule}"></td>
-        <td th:text="${event.date_debut}"></td>
-        <td th:text="${event.description}"></td>
-        <td>
-          <form th:action="@{/goToRegister}" method="post">
-            <input type="hidden" name="eventId" th:value="${event.num_even}" />
-            <button type="submit">Register</button>
-          </form>
-        </td>
-      </tr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="event : ${events}">
+          <td th:text="${event.intitule}"></td>
+          <td th:text="${event.date_debut}"></td>
+          <td th:text="${event.description}"></td>
+          <td>
+            <form th:action="@{/goToRegister}" method="post">
+              <input type="hidden" name="eventId" th:value="${event.num_even}" />
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
     </table>
-  </body>
+  </div>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
 </html>

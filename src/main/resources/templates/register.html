@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Title</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-pzjw8f+ua6mz9z+9l3r+pqz9p6h6p8qz+8f5e+xtw4v4j6j6j6j6j6j6j6j6j6j6j" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="container">
     <form th:action="@{/inscription}" method="post">
-      <input type="text" name="nom" th:placeholder="Nom" required />
-      <input type="text" name="prenom" th:placeholder="Prénom" required />
-      <input type="text" name="email" th:placeholder="Email" required />
-      <input
-        type="text"
-        name="date_naiss"
-        th:placeholder="Datedenaissance"
-        required
-      />
-      <input
-        type="text"
-        name="organisation"
-        th:placeholder="Organisation"
-        required
-      />
-      <input
-        type="text"
-        name="observations"
-        th:placeholder="Observations"
-        required
-      />
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" id="nom" name="nom" required />
+      </div>
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="date_naiss">Date de naissance</label>
+        <input type="date" class="form-control" id="date_naiss" name="date_naiss" required />
+      </div>
+      <div class="form-group">
+        <label for="organisation">Organisation</label>
+        <input type="text" class="form-control" id="organisation" name="organisation" required />
+      </div>
+      <div class="form-group">
+        <label for="observations">Observations</label>
+        <textarea class="form-control" id="observations" name="observations" required></textarea>
+      </div>
       <input type="hidden" name="eventId" th:value="${eventId}" />
-      <input type="submit" value="Register" />
+      <button type="submit" class="btn btn-primary">Register</button>
     </form>
 
-    <div th:if="${error}" class="error-message">
+    <div th:if="${error}" class="alert alert-danger">
       <p th:text="${error}"></p>
     </div>
-  </body>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-4v8k+u5+g0vqz+9l3r+pqz9p6h6p8qz+8f5e+xtw4v4j6j6j6j6j6j6j6j6j6j6j"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-pzjw8f+ua6mz9z+9l3r+pqz9p6h6p8qz+8f5e+xtw4v4j6j6j6j6j6j6j6j6j6j6j"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

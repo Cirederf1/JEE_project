@@ -1,36 +1,62 @@
 <!DOCTYPE html>
+<html>
+
 <head>
     <meta charset="UTF-8">
     <title>Formulaire d'Événement</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
-<h1>Formulaire d'Événement</h1>
-<form th:action="@{/createEvent}"  method="post">
-    <label for="intitule">Intitulé:</label>
-    <input type="text" id="intitule" name="intitule" required><br>
+    <div class="container">
+        <h1>Formulaire d'Événement</h1>
+        <form th:action="@{/createEvent}" method="post">
+            <div class="form-group">
+                <label for="intitule">Intitulé:</label>
+                <input type="text" class="form-control" id="intitule" name="intitule" required>
+            </div>
 
-    <label for="theme">Thème:</label>
-    <input type="text" id="theme" name="theme" required><br>
+            <div class="form-group">
+                <label for="theme">Thème:</label>
+                <input type="text" class="form-control" id="theme" name="theme" required>
+            </div>
 
-    <label for="date_debut">Date de début:</label>
-    <input type="text" id="date_debut" name="date_debut" required><br>
+            <div class="form-group">
+                <label for="date_debut">Date de début:</label>
+                <input type="text" class="form-control" id="date_debut" name="date_debut" required>
+            </div>
 
-    <label for="duree">Durée:</label>
-    <input type="text" id="duree" name="duree" required><br>
+            <div class="form-group">
+                <label for="duree">Durée:</label>
+                <input type="text" class="form-control" id="duree" name="duree" required>
+            </div>
 
-    <label for="nb_part_max">Nombre de participants maximum:</label>
-    <input type="text" id="nb_part_max" name="nb_part_max" required><br>
+            <div class="form-group">
+                <label for="nb_part_max">Nombre de participants maximum:</label>
+                <input type="text" class="form-control" id="nb_part_max" name="nb_part_max" required>
+            </div>
 
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description" required><br>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
 
-    <label for="organisateur">Organisateur:</label>
-    <input type="text" id="organisateur" name="organisateur" required><br>
+            <div class="form-group">
+                <label for="organisateur">Organisateur:</label>
+                <input type="text" class="form-control" id="organisateur" name="organisateur" required>
+            </div>
 
-    <label for="type_even">Type d'événement:</label>
-    <input type="text" id="type_even" name="type_even" required><br>
+            <div class="form-group">
+                <label for="type_even">Type d'événement:</label>
+                <input type="text" class="form-control" id="type_even" name="type_even" required>
+            </div>
 
-    <button type="submit">Ajouter Événement</button>
-</form>
+            <button type="submit" class="btn btn-primary">Ajouter Événement</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

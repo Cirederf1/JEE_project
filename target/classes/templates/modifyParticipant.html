@@ -1,77 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Modifier un participant</title>
-  </head>
-  <body>
-    <h1>Modifier un participant</h1>
-    <form
-      th:action="@{/modifyParticipant}"
-      th:object="${participant}"
-      method="post"
-    >
-      <label for="nom">Nom:</label>
-      <input
-        type="text"
-        id="nom"
-        name="nom"
-        th:value="${participant.nom}"
-        required
-      />
 
-      <label for="prenom">Prénom:</label>
-      <input
-        type="text"
-        id="prenom"
-        name="prenom"
-        th:value="${participant.prenom}"
-        required
-      />
+<head>
+  <meta charset="UTF-8" />
+  <title>Modifier un participant</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-pzjw8f+ua6r5g7c8s+6+scs0sz+6p6f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9" crossorigin="anonymous" />
+</head>
 
-      <label for="email">Email:</label>
-      <input
-        type="text"
-        id="email"
-        name="email"
-        th:value="${participant.email}"
-        required
-      />
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Modifier un participant</h1>
+    <form th:action="@{/modifyParticipant}" th:object="${participant}" method="post">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nom">Nom:</label>
+            <input type="text" class="form-control" id="nom" name="nom" th:value="${participant.nom}" required />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="prenom">Prénom:</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" th:value="${participant.prenom}"
+              required />
+          </div>
+        </div>
+      </div>
 
-      <label for="date_naiss">Date de naissance:</label>
-      <input
-        type="text"
-        id="date_naiss"
-        name="date_naiss"
-        th:value="${participant.date_naiss}"
-        required
-      />
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" th:value="${participant.email}" required />
+      </div>
 
-      <label for="organisation">Organisation:</label>
-      <input
-        type="text"
-        id="organisation"
-        name="organisation"
-        th:value="${participant.organisation}"
-        required
-      />
+      <div class="form-group">
+        <label for="date_naiss">Date de naissance:</label>
+        <input type="date" class="form-control" id="date_naiss" name="date_naiss" th:value="${participant.date_naiss}"
+          required />
+      </div>
 
-      <label for="observations">Observations:</label>
-      <input
-        type="text"
-        id="observations"
-        name="observations"
-        th:value="${participant.observations}"
-        required
-      />
+      <div class="form-group">
+        <label for="organisation">Organisation:</label>
+        <input type="text" class="form-control" id="organisation" name="organisation"
+          th:value="${participant.organisation}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="observations">Observations:</label>
+        <input type="text" class="form-control" id="observations" name="observations"
+          th:value="${participant.observations}" required />
+      </div>
 
       <input type="hidden" name="eventId" th:value="${event.num_even}" />
-      <input
-        type="hidden"
-        name="participantId"
-        th:value="${participant.num_pers}"
-      />
-      <button type="submit">Modifier Participant</button>
+      <input type="hidden" name="participantId" th:value="${participant.num_pers}" />
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Modifier Participant</button>
+      </div>
     </form>
-  </body>
+  </div>
+</body>
+
 </html>

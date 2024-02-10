@@ -1,54 +1,62 @@
-<style>
-  .button-container {
-    display: flex;
-  }
-</style>
-<table>
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Prénom</th>
-      <th>Email</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="participant : ${event.participants}">
-      <td th:text="${participant.nom}"></td>
-      <td th:text="${participant.prenom}"></td>
-      <td th:text="${participant.email}"></td>
-      <td class="button-container">
-        <form th:action="@{/deleteEventParticipant}" method="post">
-          <input
-            type="hidden"
-            name="participantId"
-            th:value="${participant.num_pers}"
-          />
-          <input type="hidden" name="eventId" th:value="${event.num_even}" />
-          <button type="submit">Delete</button>
-        </form>
-        <form th:action="@{/goToModifyParticipant}" method="post">
-          <input type="hidden" name="eventId" th:value="${event.num_even}" />
-          <input
-            type="hidden"
-            name="participantId"
-            th:value="${participant.num_pers}"
-          />
-          <input type="hidden" name="eventId" th:value="${event.num_even}" />
-          <button type="submit">Modify</button>
-        </form>
-      </td>
-    </tr>
-  </tbody>
+<!DOCTYPE html>
+<html lang="en">
 
-  <tfoot>
-    <tr>
-      <td class="button-container">
-        <form th:action="@{/goToRegisterAdmin}" method="post">
-          <input type="hidden" name="eventId" th:value="${event.num_even}" />
-          <button type="submit">Register</button>
-        </form>
-      </td>
-    </tr>
-  </tfoot>
-</table>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Participants</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .button-container {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Event Participants</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="participant : ${event.participants}">
+          <td th:text="${participant.nom}"></td>
+          <td th:text="${participant.prenom}"></td>
+          <td th:text="${participant.email}"></td>
+          <td class="button-container">
+            <form th:action="@{/deleteEventParticipant}" method="post">
+              <input type="hidden" name="participantId" th:value="${participant.num_pers}" />
+              <input type="hidden" name="eventId" th:value="${event.num_even}" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <form th:action="@{/goToModifyParticipant}" method="post">
+              <input type="hidden" name="eventId" th:value="${event.num_even}" />
+              <input type="hidden" name="participantId" th:value="${participant.num_pers}" />
+              <input type="hidden" name="eventId" th:value="${event.num_even}" />
+              <button type="submit" class="btn btn-primary">Modify</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="button-container">
+            <form th:action="@{/goToRegisterAdmin}" method="post">
+              <input type="hidden" name="eventId" th:value="${event.num_even}" />
+              <button type="submit" class="btn btn-success">Register</button>
+            </form>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</body>
+
+</html>
