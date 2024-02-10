@@ -1,34 +1,36 @@
 package ensg.tsi.j2e.colloques.metier;
 
-
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 public class Evenement {
     @Id
     @GeneratedValue
-    private long num_even;
-    private String intitule;
-    private String theme;
-    private String date_debut;
-    private int duree;
-    private int nb_part_max;
-    private String description;
-    private String organisateur;
-    private String type_even;
+    private long num_even; // Identifiant unique de l'événement
 
+    // Détails de l'événement
+    private String intitule; // Titre de l'événement
+    private String theme; // Thème de l'événement
+    private String date_debut; // Date de début de l'événement
+    private int duree; // Durée de l'événement en heures
+    private int nb_part_max; // Nombre maximum de participants autorisés
+    private String description; // Description de l'événement
+    private String organisateur; // Nom de l'organisateur de l'événement
+    private String type_even; // Type de l'événement
+
+    // Relation One-to-Many avec Participant: Un événement peut avoir plusieurs
+    // participants
     @OneToMany(mappedBy = "evenement", cascade = CascadeType.ALL)
     private List<Participant> participants = new ArrayList<>();
 
     public Evenement() {
     }
 
-    // Constructeur avec paramètres
+    // Constructeur avec paramètres pour initialiser un événement
     public Evenement(String intitule, String theme, String date_debut, int duree, int nb_part_max,
-                     String description, String organisateur, String type_even) {
+            String description, String organisateur, String type_even) {
         this.intitule = intitule;
         this.theme = theme;
         this.date_debut = date_debut;
@@ -38,14 +40,18 @@ public class Evenement {
         this.organisateur = organisateur;
         this.type_even = type_even;
     }
-    
+
+    // Méthode getter pour récupérer l'identifiant de l'événement
     public long getNum_even() {
         return num_even;
     }
 
+    // Méthode setter pour définir l'identifiant de l'événement
     public void setNum_even(int num_even) {
         this.num_even = num_even;
     }
+
+    // Méthodes getter et setter pour les autres attributs de l'événement
 
     public String getIntitule() {
         return intitule;
@@ -111,6 +117,7 @@ public class Evenement {
         this.type_even = type_even;
     }
 
+    // Méthode pour ajouter un participant à l'événement
     public void addParticipant(Participant participant) {
         if (participants == null) {
             participants = new ArrayList<>();
@@ -119,6 +126,8 @@ public class Evenement {
         participant.setEvenement(this);
     }
 
+    // Méthode pour mettre à jour les détails de l'événement avec ceux d'un autre
+    // événement
     public void setEvenementDetails(Evenement evenement) {
         this.intitule = evenement.getIntitule();
         this.theme = evenement.getTheme();
@@ -130,12 +139,8 @@ public class Evenement {
         this.type_even = evenement.getType_even();
     }
 
+    // Méthode getter pour récupérer la liste des participants à l'événement
     public List<Participant> getParticipants() {
         return participants;
     }
 }
-
-    
-    
-
-

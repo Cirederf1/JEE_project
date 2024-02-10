@@ -17,32 +17,36 @@ public class ParticipantController {
     private final EvenementService evenementService;
     private final ParticipantService participantService;
 
+    // Constructeur prenant le service de participants et le service d'événements
     public ParticipantController(ParticipantService participantService, EvenementService evenementService) {
         this.participantService = participantService;
         this.evenementService = evenementService;
     }
 
-
+    // Affiche la liste des participants pour un événement spécifique
     @PostMapping("/goToEventParticipants")
     public String goToEventParticipants(@RequestParam("eventId") Long eventId, Model model) {
         Evenement e = evenementService.findById(eventId).get();
         model.addAttribute("event", e);
-        return "eventParticipants";
+        return "eventParticipants"; // Retourne la vue d'affichage des participants à l'événement
     }
 
-
+    // Redirige vers la page d'inscription pour un événement spécifique
     @PostMapping("/goToRegister")
     public String goToRegister(@RequestParam("eventId") Long id, Model model) {
         model.addAttribute("eventId", id);
-        return "register";
+        return "register"; // Retourne la vue d'inscription
     }
 
+    // Redirige vers la page d'inscription pour un administrateur à un événement
+    // spécifique
     @PostMapping("/goToRegisterAdmin")
     public String goToRegisterAdmin(@RequestParam("eventId") Long id, Model model) {
         model.addAttribute("eventId", id);
-        return "registerAdmin";
+        return "registerAdmin"; // Retourne la vue d'inscription pour un administrateur
     }
 
+    // Traitement de l'inscription d'un participant à un événement
     @PostMapping("/inscription")
     public String inscription(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom,
             @RequestParam("email") String email, @RequestParam("date_naiss") String date_naiss,
@@ -52,23 +56,29 @@ public class ParticipantController {
         Evenement e = evenementService.findById(id).get();
         Participant p = new Participant(nom, prenom, email, date_naiss, organisation, observations);
 
-        // Check if participant's email already exists in the event's participants list
-        boolean emailExists = e.getParticipants().stream().anyMatch(participant -> participant.getEmail().equals(email));
+        // Vérifie si l'e-mail du participant existe déjà dans la liste des participants
+        // de l'événement
+        boolean emailExists = e.getParticipants().stream()
+                .anyMatch(participant -> participant.getEmail().equals(email));
         if (emailExists) {
-            model.addAttribute("error", "Email already exists in the event's participants list. Please use another email.");
+            // Ajoute un message d'erreur si l'e-mail existe déjà et redirige vers la page
+            // d'inscription
+            model.addAttribute("error",
+                    "Email already exists in the event's participants list. Please use another email.");
             model.addAttribute("eventId", e.getNum_even());
             return "register";
-        }else{
+        } else {
+            // Enregistre le participant, l'ajoute à l'événement et redirige vers la page
+            // d'accueil
             participantService.save(p);
             e.addParticipant(p);
             evenementService.save(e);
             return "redirect:/";
         }
 
-
     }
 
-
+    // Traitement de l'inscription d'un administrateur à un événement
     @PostMapping("/inscriptionAdmin")
     public String inscriptionAdmin(@RequestParam("nom") String nom, @RequestParam("prenom") String prenom,
             @RequestParam("email") String email, @RequestParam("date_naiss") String date_naiss,
@@ -78,13 +88,20 @@ public class ParticipantController {
         Evenement e = evenementService.findById(id).get();
         Participant p = new Participant(nom, prenom, email, date_naiss, organisation, observations);
 
-        // Check if participant's email already exists in the event's participants list
-        boolean emailExists = e.getParticipants().stream().anyMatch(participant -> participant.getEmail().equals(email));
+        // Vérifie si l'e-mail du participant existe déjà dans la liste des participants
+        // de l'événement
+        boolean emailExists = e.getParticipants().stream()
+                .anyMatch(participant -> participant.getEmail().equals(email));
         if (emailExists) {
-            model.addAttribute("error", "Email already exists in the event's participants list. Please use another email.");
+            // Ajoute un message d'erreur si l'e-mail existe déjà et redirige vers la page
+            // d'inscription pour l'administrateur
+            model.addAttribute("error",
+                    "Email already exists in the event's participants list. Please use another email.");
             model.addAttribute("eventId", e.getNum_even());
             return "registerAdmin";
-        }else{
+        } else {
+            // Enregistre le participant, l'ajoute à l'événement et redirige vers la page
+            // des participants de l'événement
             participantService.save(p);
             e.addParticipant(p);
             evenementService.save(e);
@@ -93,6 +110,7 @@ public class ParticipantController {
         }
     }
 
+    // Supprime un participant d'un événement
     @PostMapping("/deleteEventParticipant")
     public String deleteParticipant(@RequestParam("participantId") Long participantId, @RequestParam("eventId") Long id,
             Model model) {
@@ -100,21 +118,25 @@ public class ParticipantController {
         Evenement e = evenementService.findById(id).get();
         participantService.delete(p);
         model.addAttribute("event", e);
-        return "eventParticipants";
+        return "eventParticipants"; // Retourne la vue des participants de l'événement après la suppression
     }
 
+    // Redirige vers la page de modification d'un participant
     @PostMapping("/goToModifyParticipant")
-    public String goToModifyParticipant(@RequestParam("participantId") Long participantId, @RequestParam("eventId") Long id,
+    public String goToModifyParticipant(@RequestParam("participantId") Long participantId,
+            @RequestParam("eventId") Long id,
             Model model) {
         Participant p = participantService.findById(participantId).get();
         Evenement e = evenementService.findById(id).get();
         model.addAttribute("participant", p);
         model.addAttribute("event", e);
-        return "modifyParticipant";
+        return "modifyParticipant"; // Retourne la vue de modification d'un participant
     }
 
+    // Traite la modification d'un participant
     @PostMapping("/modifyParticipant")
-    public String modifyParticipant(@RequestParam("participantId") Long participantId, @RequestParam("eventId") Long id, @ModelAttribute Participant updatedParticipant,
+    public String modifyParticipant(@RequestParam("participantId") Long participantId, @RequestParam("eventId") Long id,
+            @ModelAttribute Participant updatedParticipant,
             Model model) {
         Participant p = participantService.findById(participantId).get();
         Evenement e = evenementService.findById(id).get();
@@ -124,8 +146,7 @@ public class ParticipantController {
         evenementService.save(e);
 
         model.addAttribute("event", e);
-        return "eventParticipants";
+        return "eventParticipants"; // Retourne la vue des participants de l'événement après la modification
     }
 
 }
-

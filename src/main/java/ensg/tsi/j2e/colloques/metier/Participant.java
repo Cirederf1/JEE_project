@@ -6,14 +6,17 @@ import jakarta.persistence.*;
 public class Participant {
     @Id
     @GeneratedValue
-    private long num_pers;
-    private String nom;
-    private String prenom;
-    private String email;
-    private String date_naiss;
-    private String organisation;
-    private String observations;
+    private long num_pers; // Identifiant unique du participant
 
+    // Informations sur le participant
+    private String nom; // Nom du participant
+    private String prenom; // Prénom du participant
+    private String email; // Adresse email du participant
+    private String date_naiss; // Date de naissance du participant
+    private String organisation; // Organisation du participant
+    private String observations; // Observations sur le participant
+
+    // Relation Many-to-One avec Evenement: Un participant appartient à un événement
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "num_even", referencedColumnName = "num_even")
     private Evenement evenement;
@@ -21,7 +24,9 @@ public class Participant {
     public Participant() {
     }
 
-    public Participant(String nom, String prenom, String email, String date_naiss, String organisation, String observations) {
+    // Constructeur avec paramètres pour initialiser un participant
+    public Participant(String nom, String prenom, String email, String date_naiss, String organisation,
+            String observations) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -30,13 +35,17 @@ public class Participant {
         this.observations = observations;
     }
 
+    // Méthode getter pour récupérer l'identifiant du participant
     public long getNum_pers() {
         return num_pers;
     }
 
+    // Méthode setter pour définir l'identifiant du participant
     public void setNum_pers(int num_pers) {
         this.num_pers = num_pers;
     }
+
+    // Méthodes getter et setter pour les autres attributs du participant
 
     public String getNom() {
         return nom;
@@ -86,16 +95,18 @@ public class Participant {
         this.observations = observations;
     }
 
+    // Méthode getter pour récupérer l'événement auquel le participant appartient
     public Evenement getEvenement() {
         return evenement;
     }
 
+    // Méthode setter pour définir l'événement auquel le participant appartient
     public void setEvenement(Evenement evenement) {
         this.evenement = evenement;
     }
 
-    
-
+    // Méthode pour mettre à jour les informations du participant avec celles d'un
+    // autre participant
     public void updateParticipant(Participant p) {
         this.nom = p.getNom();
         this.prenom = p.getPrenom();
@@ -106,5 +117,3 @@ public class Participant {
     }
 
 }
-
-
